@@ -1,7 +1,7 @@
-local api = vim.api
-local util = require('module.util')
-
 local M = {}
+
+local util = require('module.util')
+local api = vim.api
 
 local cpp_code = {
   "#include <iostream>",
