@@ -11,7 +11,6 @@ function M.random_switch()
 end
 
 -- カラースキームを選択する
-local fzf = require("fzf-lua")
 function M.choose_colorscheme()
   choose.choose_colorscheme_with_cpp_preview()
 end
