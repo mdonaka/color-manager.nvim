@@ -1,8 +1,23 @@
 local M = {}
 
-local util = require('module.util')
+local nvim_colors = vim.fn.stdpath("config") .. "/colors/"
+
 local api = vim.api
 local preview = require('module.preview')
+
+-- awesome-vim-colorschemesからcolorscheme一覧とパスを取得
+local function get_awesome_schemes()
+  local root = vim.fn.stdpath("data") .. "/lazy/awesome-vim-colorschemes/colors/"
+  local files = vim.fn.glob(root .. "*.vim", 0, 1)
+  local names = {}
+  local paths = {}
+  for _, f in ipairs(files) do
+    local fname = vim.fn.fnamemodify(f, ":t:r")
+    table.insert(names, fname)
+    paths[fname] = f
+  end
+  return names, paths
+end
 
 local function calc_opts()
   local total_lines = vim.o.lines
@@ -25,16 +40,16 @@ local function calc_opts()
   }
 end
 
-function M.choose_colorscheme_with_preview()
+function M.pick_and_install_with_preview()
   local opts = calc_opts()
   local preview_buf, preview_win = preview.open_float_preview(opts)
-  local schemas = util.get_colorscheme_files()
+  local schemes, scheme_paths = get_awesome_schemes()
   local original_scheme = vim.g.colors_name
   local _last_preview = nil
 
   require('fzf-lua').colorschemes({
-    prompt = "Local Colorscheme> ",
-    colors = schemas,
+    prompt = "Awesome Colorscheme> ",
+    colors = schemes,
     winopts = {
       width = opts.fzf_width,
       height = opts.height,
@@ -52,7 +67,24 @@ function M.choose_colorscheme_with_preview()
     actions = {
       ['default'] = function(selected, _)
         if preview_win then pcall(api.nvim_win_close, preview_win, true) end
-        vim.cmd("colorscheme " .. selected[1])
+        if selected and selected[1] then
+          local scheme = selected[1]
+          local src = scheme_paths[scheme]
+          if src then
+            vim.fn.mkdir(nvim_colors, "p")
+            local dest = nvim_colors .. vim.fn.fnamemodify(src, ":t")
+            local cp_result = vim.fn.system({ 'cp', src, dest })
+            if vim.v.shell_error ~= 0 then
+              print("ファイルコピー失敗: " .. dest .. " : " .. vim.inspect(cp_result))
+            else
+              print("インストール完了: " .. dest)
+            end
+          end
+        end
+        -- カラースキームを元に戻す
+        if original_scheme then
+          pcall(vim.cmd, "colorscheme " .. original_scheme)
+        end
       end,
       ['esc'] = function(_, _)
         if preview_win then pcall(api.nvim_win_close, preview_win, true) end
