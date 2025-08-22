@@ -1,9 +1,8 @@
 local M = {}
 
-local nvim_colors = vim.fn.stdpath("config") .. "/colors/"
-
 local api = vim.api
 local preview = require('module.preview')
+local opsions = require("module.config").options
 
 -- awesome-vim-colorschemesからcolorscheme一覧とパスを取得
 local function get_awesome_schemes()
@@ -71,8 +70,7 @@ function M.pick_and_install_with_preview()
           local scheme = selected[1]
           local src = scheme_paths[scheme]
           if src then
-            vim.fn.mkdir(nvim_colors, "p")
-            local dest = nvim_colors .. vim.fn.fnamemodify(src, ":t")
+            local dest = opsions.colors_dir .. vim.fn.fnamemodify(src, ":t")
             local cp_result = vim.fn.system({ 'cp', src, dest })
             if vim.v.shell_error ~= 0 then
               print("ファイルコピー失敗: " .. dest .. " : " .. vim.inspect(cp_result))
