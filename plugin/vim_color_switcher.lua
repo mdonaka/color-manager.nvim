@@ -1,13 +1,3 @@
-local mod = require("vim_color_switcher")
-
--- 起動時にランダムにカラースキーマを変更
-if mod.options.randomize_colorscheme_on_startup then
-  local util = require("module.util")
-  local schemes = util.get_colorscheme_files()
-  local pick = util.pick_random(schemes)
-  vim.cmd.colorscheme(pick)
-end
-
 -- :ColorSwitcherコマンドを追加
 vim.api.nvim_create_user_command("ColorSwitcher",
   function() require("module.choose").choose_colorscheme_with_preview() end,
