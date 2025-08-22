@@ -1,6 +1,6 @@
 local M = {}
 
-local util = require('module.util')
+local random = require('module.random')
 local api = vim.api
 local preview = require('module.preview')
 
@@ -28,7 +28,7 @@ end
 function M.choose_colorscheme_with_preview()
   local opts = calc_opts()
   local preview_buf, preview_win = preview.open_float_preview(opts)
-  local schemas = util.get_colorscheme_files()
+  local schemas = random.get_colorscheme_files()
   local original_scheme = vim.g.colors_name
   local _last_preview = nil
 
