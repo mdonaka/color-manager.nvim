@@ -1,14 +1,12 @@
 local M = {}
 
-local nvim_colors = vim.fn.stdpath("config") .. "/colors/"
-
 local api = vim.api
 local preview = require('module.preview')
+local options = require('module.config').options
 
 -- ローカルcolors/ディレクトリからカラースキーム一覧を取得
 local function get_local_schemes()
-  local root = nvim_colors
-  local files = vim.fn.glob(root .. "*.vim", 0, 1)
+  local files = vim.fn.glob(options.colors_dir .. "*.vim", 0, 1)
   local names = {}
   local paths = {}
   for _, f in ipairs(files) do
