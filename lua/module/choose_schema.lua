@@ -1,8 +1,12 @@
 local M = {}
 
-local preview = require("module.preview")
-local options = require('module.config').options
-
+--- カラースキームをプレビュー付きで選択・適用する
+-- @function M.choose_colorscheme_with_preview
+-- @usage
+--   require('yourmodule').choose_colorscheme_with_preview()
+-- @desc
+--   options.colors_dir にあるカラースキームから選択＆リアルタイムプレビュー。
+--   keep_last=true なので選択したスキームがそのまま適用される。
 function M.choose_colorscheme_with_preview()
   preview.colorscheme_action_with_preview {
     prompt = "Choose Colorscheme> ",
@@ -16,6 +20,13 @@ function M.choose_colorscheme_with_preview()
   }
 end
 
+--- awesome-vim-colorschemes からカラースキームをプレビュー付きで選択＆インストール
+-- @function M.pick_and_install_with_preview
+-- @usage
+--   require('yourmodule').pick_and_install_with_preview()
+-- @desc
+--   stdpath("data")/lazy/awesome-vim-colorschemes/colors/ から選択し、
+--   options.colors_dir にコピー。コピー失敗時はメッセージ表示。
 function M.pick_and_install_with_preview()
   preview.colorscheme_action_with_preview {
     prompt = "Awesome Colorscheme> ",
@@ -33,6 +44,13 @@ function M.pick_and_install_with_preview()
   }
 end
 
+--- カラースキームをプレビュー付きで選択・アンインストール
+-- @function M.uninstall_colorscheme_with_preview
+-- @usage
+--   require('yourmodule').uninstall_colorscheme_with_preview()
+-- @desc
+--   options.colors_dir にあるカラースキームを選択し、ファイルを削除。
+--   削除失敗時のみエラーメッセージを表示。
 function M.uninstall_colorscheme_with_preview()
   preview.colorscheme_action_with_preview {
     prompt = "Uninstall Colorscheme> ",
