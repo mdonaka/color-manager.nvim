@@ -1,5 +1,8 @@
 local M = {}
 
+local preview = require("module.preview")
+local options = require("module.config").options
+
 --- カラースキームをプレビュー付きで選択・適用する
 -- @function M.choose_colorscheme_with_preview
 -- @usage

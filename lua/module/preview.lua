@@ -163,6 +163,4 @@ function M.colorscheme_action_with_preview(opts)
   })
 end
 
-return Mreturn
-Mreturn
-M
+return M
