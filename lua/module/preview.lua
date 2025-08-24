@@ -19,6 +19,10 @@ M.preview_lines = {
 }
 
 
+--- 既存のプレビューバッファとウィンドウを閉じる
+-- @function M.close_existing_preview_buf
+-- @desc
+--   バッファ名が "preview.lua" のバッファを探し、関連付いたウィンドウをすべて閉じてからバッファも削除します。
 function M.close_existing_preview_buf()
   for _, buf in ipairs(api.nvim_list_bufs()) do
     if api.nvim_buf_get_name(buf):match("preview%.lua$") then
@@ -34,6 +38,13 @@ function M.close_existing_preview_buf()
   end
 end
 
+--- フロートウィンドウで Lua プレビューを開く
+-- @function M.open_float_preview
+-- @param opts テーブル { preview_width, height, row, preview_col }
+-- @return buf: 作成されたバッファID, win: 作成されたウィンドウID
+-- @desc
+--   プレビュー用のフロートウィンドウを開き、バッファ名を "preview.lua" としてセットします。
+--   M.preview_lines に設定された内容を表示します。
 function M.open_float_preview(opts)
   M.close_existing_preview_buf()
   local buf = api.nvim_create_buf(false, true)
@@ -59,6 +70,11 @@ function M.open_float_preview(opts)
   return buf, win
 end
 
+--- FZF・プレビュー用ウィンドウのサイズと位置を計算する
+-- @function calc_opts
+-- @return テーブル { row, height, fzf_col, preview_col, fzf_width, preview_width }
+-- @desc
+--   画面サイズからFZFとプレビューウィンドウのレイアウトパラメータを計算します。
 local function calc_opts()
   local total_lines = vim.o.lines
   local total_columns = vim.o.columns
@@ -80,6 +96,16 @@ local function calc_opts()
   }
 end
 
+--- プレビュー付きカラースキーム選択UI
+-- @function M.colorscheme_action_with_preview
+-- @param opts テーブル
+--   - prompt: プロンプト文字列
+--   - dir: カラースキームディレクトリパス
+--   - on_select_fn: スキーム選択時に呼ばれる関数
+--   - keep_last: true の場合、選択後もそのままスキームを適用する
+-- @desc
+--   指定ディレクトリのカラースキーム一覧をFZFでプレビュー付き表示し、選択・適用ができるUIを提供します。
+--   プレビュー用のフロートウィンドウも連動して管理します。
 function M.colorscheme_action_with_preview(opts)
   local prompt = opts.prompt or "Colorscheme> "
   local dir = opts.dir
@@ -137,4 +163,6 @@ function M.colorscheme_action_with_preview(opts)
   })
 end
 
-return M
+return Mreturn
+Mreturn
+M

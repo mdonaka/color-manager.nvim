@@ -1,7 +1,13 @@
 local M = {}
 
 
--- テーブルからランダムに1つ要素を選ぶ。空の場合はnilを返す
+--- カラースキームをランダムに選んで適用する
+-- @function M.pick_random
+-- @desc
+--   module.config.options.randomize_colorscheme_on_startup が true の場合のみ有効。
+--   options.colors_dir にあるカラースキームから1つランダム選択して :colorscheme で適用する。
+--   カラースキームが0件の場合や設定が無効な場合は何もしない。
+-- @return nil 常にnilを返す
 function M.pick_random()
   local options = require("module.config").options
   if options.randomize_colorscheme_on_startup == false then
