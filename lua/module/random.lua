@@ -9,7 +9,7 @@ function M.pick_random()
   end
 
   local util = require("module.util")
-  local tbl, _ = util.get_colorscheme_names_and_paths()
+  local tbl, _ = util.get_schemes_from_dir(options.colors_dir)
   if #tbl == 0 then return nil end
   math.randomseed(os.time())
   vim.cmd.colorscheme(tbl[math.random(#tbl)])
