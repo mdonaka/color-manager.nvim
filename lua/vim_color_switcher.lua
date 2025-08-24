@@ -9,6 +9,7 @@ function M.setup(opts)
     M.options[k] = v
   end
   random.pick_random()
+  vim.opt.rtp:append(vim.fn.fnamemodify(M.options.colors_dir, ":h"))
 end
 
 return M
