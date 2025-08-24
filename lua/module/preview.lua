@@ -18,6 +18,7 @@ M.preview_lines = {
   "}",
 }
 
+
 function M.close_existing_preview_buf()
   for _, buf in ipairs(api.nvim_list_bufs()) do
     if api.nvim_buf_get_name(buf):match("preview%.lua$") then
@@ -81,12 +82,13 @@ end
 
 function M.colorscheme_action_with_preview(opts)
   local prompt = opts.prompt or "Colorscheme> "
-  local get_schemes_fn = opts.get_schemes_fn
+  local dir = opts.dir
   local on_select_fn = opts.on_select_fn
 
+  local util = require('module.util')
   local ui_opts = calc_opts()
   local preview_buf, preview_win = M.open_float_preview(ui_opts)
-  local schemes, scheme_paths = get_schemes_fn()
+  local schemes, scheme_paths = util.get_schemes_from_dir(dir)
   local original_scheme = vim.g.colors_name
   local _last_preview = nil
 

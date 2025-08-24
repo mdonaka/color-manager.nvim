@@ -1,10 +1,7 @@
 local M = {}
 
-
--- ユーザーのconfig/colorsディレクトリ内の全ての.vimカラースキームファイル名とパスを返す
-function M.get_colorscheme_names_and_paths()
-  local options = require("module.config").options
-  local dir = options.colors_dir
+-- 共通: 指定ディレクトリからカラースキーム名リストとパスのテーブルを取得
+function M.get_schemes_from_dir(dir)
   local files = vim.fn.globpath(dir, "*.vim", false, true)
   local names = {}
   local paths = {}
