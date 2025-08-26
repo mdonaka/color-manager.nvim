@@ -1,3 +1,8 @@
+[![GitHub license](https://img.shields.io/github/license/mdonaka/vim-color-switcher.svg)](https://github.com/mdonaka/vim-color-switcher/blob/main/LICENSE)
+[![Neovim](https://img.shields.io/badge/Neovim-support-green.svg)](https://neovim.io/)
+
+[日本語READMEはこちら](./README-ja.md)
+
 # vim-color-switcher
 vim-color-switcher is a plugin for managing Color Schemes in Vim.  
 It allows you to easily select, install, and uninstall color schemes.
