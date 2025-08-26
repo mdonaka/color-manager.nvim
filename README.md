@@ -1,10 +1,10 @@
-[![GitHub license](https://img.shields.io/github/license/mdonaka/vim-color-switcher.svg)](https://github.com/mdonaka/vim-color-switcher/blob/main/LICENSE)
+[![GitHub license](https://img.shields.io/github/license/mdonaka/color-manager.nvim.svg)](https://github.com/mdonaka/color-manager.nvim/blob/main/LICENSE)
 [![Neovim](https://img.shields.io/badge/Neovim-support-green.svg)](https://neovim.io/)
 
 [日本語READMEはこちら](./README-ja.md)
 
-# vim-color-switcher
-vim-color-switcher is a plugin for managing Color Schemes in Vim.  
+# color-manager.nvim
+color-manager.nvim is a plugin for managing Color Schemes in Vim. 
 It allows you to easily select, install, and uninstall color schemes.
 
 ![Demo GIF](assets/demo.gif)
@@ -15,23 +15,32 @@ It allows you to easily select, install, and uninstall color schemes.
 
 ```lua
 {
-  "mdonaka/vim-color-switcher",
+  "mdonaka/color-manager.nvim",
+  dependencies = {
+    "rafi/awesome-vim-colorschemes",
+    {
+      "ibhagwan/fzf-lua",
+      dependencies = {
+        "nvim-tree/nvim-web-devicons",
+      },
+    }
+  },
 }
 ```
 
 ### vim-plug
 
 ```vim
-Plug 'mdonaka/vim-color-switcher'
+Plug 'mdonaka/color-manager.nvim'
 ```
 
 ## Commands
 
 | Command                    | Description                                                            |
 |----------------------------|------------------------------------------------------------------------|
-| `:ColorSwitcher`           | Opens the color scheme selection UI and switches a scheme            |
-| `:ColorSwitcherInstall`    | Opens the color scheme selection UI and installs a color scheme          |
-| `:ColorSwitcherUninstall`  | Opens the color scheme selection UI and uninstalls a color scheme        |
+| `:ColorManager`           | Opens the color scheme selection UI and switches a scheme            |
+| `:ColorManagerInstall`    | Opens the color scheme selection UI and installs a color scheme          |
+| `:ColorManagerUninstall`  | Opens the color scheme selection UI and uninstalls a color scheme        |
 
 ## Configuration
 
@@ -43,18 +52,19 @@ Plug 'mdonaka/vim-color-switcher'
 ### lazy.nvim
 ```lua
 {
-  "mdonaka/vim-color-switcher",
+  "mdonaka/color-manager.nvim",
   opts = {
     colors_dir = {string},
     randomize_colorscheme_on_startup = {boolean},
   }
+  -- other options...
 }
 ```
 ### vim-plug
 ```vim
-Plug 'mdonaka/vim-color-switcher'
+Plug 'mdonaka/color-manager.nvim'
 lua << EOF
-require("vim-color-switcher").setup({
+require("color_manager").setup({
   colors_dir = {string},
   randomize_colorscheme_on_startup = {boolean},
 })

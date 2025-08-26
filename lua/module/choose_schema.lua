@@ -32,7 +32,7 @@ end
 --   options.colors_dir にコピー。コピー失敗時はメッセージ表示。
 function M.pick_and_install_with_preview()
   preview.colorscheme_action_with_preview {
-    prompt = "Awesome Colorscheme> ",
+    prompt = "Install Colorscheme> ",
     dir = vim.fn.stdpath("data") .. "/lazy/awesome-vim-colorschemes/colors/",
     on_select_fn = function(scheme, scheme_paths)
       local src = scheme_paths[scheme]
