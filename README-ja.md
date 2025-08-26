@@ -32,6 +32,9 @@ Color Schemaの選択，インストール，アンインストールを簡単�
 
 ```vim
 Plug 'mdonaka/color-manager.nvim'
+Plug 'rafi/awesome-vim-colorschemes'
+Plug 'ibhagwan/fzf-lua'
+Plug 'nvim-tree/nvim-web-devicons'
 ```
 
 
@@ -53,16 +56,15 @@ Plug 'mdonaka/color-manager.nvim'
 ```lua
 {
   "mdonaka/color-manager.nvim",
+  dependencies = { ... },
   opts = {
     colors_dir = {string},
     randomize_colorscheme_on_startup = {boolean},
   }
-  -- other options...
 }
 ```
 ### vim-plug
 ```vim
-Plug 'mdonaka/color-manager.nvim'
 lua << EOF
 require("color_manager").setup({
   colors_dir = {string},
@@ -70,7 +72,6 @@ require("color_manager").setup({
 })
 EOF
 ```
-
 
 ## ライセンス
 
