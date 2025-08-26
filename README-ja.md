@@ -1,3 +1,8 @@
+[![GitHub license](https://img.shields.io/github/license/mdonaka/vim-color-switcher.svg)](https://github.com/mdonaka/vim-color-switcher/blob/main/LICENSE)
+[![Neovim](https://img.shields.io/badge/Neovim-support-green.svg)](https://neovim.io/)
+
+[English README is here](./README.md)
+
 # vim-color-switcher
 vim-color-switcherはVimのColor Schemaを管理するPluginです．
 Color Schemaの選択，インストール，アンインストールを簡単に行うことができます．
